@@ -7,7 +7,7 @@ const main = async () => {
     host: "localhost:8080",
   });
 
-  // Define schema
+
   const schemaConfig = {
     class: "MemeObject",
     vectorizer: "img2vec-neural",
@@ -29,7 +29,7 @@ const main = async () => {
     ],
   };
 
-  // Create schema class
+
   await client.schema.classCreator().withClass(schemaConfig).do();
 
   // Create data object
@@ -44,7 +44,6 @@ const main = async () => {
     })
     .do();
 
-  // Query for similar images
   const test = Buffer.from(readFileSync("./assets/img4.jpg")).toString(
     "base64"
   );
@@ -56,7 +55,7 @@ const main = async () => {
     .withLimit(1)
     .do();
 
-  // Write result to filesystem
+
   const result = resImage.data.Get.MemeObject[0].image;
   writeFileSync("./result.jpg", result, "base64");
 };
